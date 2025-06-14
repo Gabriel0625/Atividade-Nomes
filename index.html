@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formatador de Nome</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Formatador de Nome</h1>
+ 
+  <form id="formNome">
+    <label for="nomeCompleto">Digite o nome completo:</label>
+    <input type="text" id="nomeCompleto" placeholder="Ex: Maria Eduarda Barbosa da Silva" required>
+    <button type="submit">Formatar Nome</button>
+  </form>
+ 
+  <h2>Resultado:</h2>
+  <p id="resultado">...</p>
+
+<Script>function formatarNome(nomeCompleto) {
+    const preposicoes = ["da", "de", "do", "dos", "das", "e"];
+    
+    const palavras = nomeCompleto.trim().split(" ");
+   
+    const palavrasFiltradas = palavras.filter(p => !preposicoes.includes(p.toLowerCase()));
+   
+    if (palavrasFiltradas.length < 2) {
+      return "Nome incompleto para formatar.";
+    }
+   
+    const sobrenome = palavrasFiltradas[palavrasFiltradas.length - 1];
+   
+    const restoNome = palavrasFiltradas.slice(0, -1).join(" ");
+   
+    return `${sobrenome}, ${restoNome}`;
+  }
+   
+  document.getElementById("formNome").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const nome = document.getElementById("nomeCompleto").value;
+    const resultado = formatarNome(nome);
+    document.getElementById("resultado").textContent = resultado;
+  });</Script>
+
+
+</body>
+</html>
